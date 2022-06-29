@@ -7,17 +7,19 @@
 ### 模块分析
 ### 1. 首页 index
 
-| 页面部分     | 是否封装 | 原因         | 名称   |
-| ------------ | -------- | ------------ | ------ |
-| 顶部滑动导航 | 否       |              |        |
-| 头图         | 需要     | 多处地方使用 | banner |
-| 宫格         | 需要     | 多处地方使用 | icons  |
-| 卡片         | 需要     | 多处地方使用 | card   |
-| 品牌         | 需要     | 多处地方使用 | brand  |
-| 热销         | 需要     | 多处地方使用 | hot    |
-| 店铺         | 需要     |              | Shop   |
-| 猜你喜欢     | 需要     |              |        |
-| 上拉加载     |          |              |        |
+| 页面部分   | 是否封装 | 原因                                                | 名称          |
+|--------|------|---------------------------------------------------|-------------|
+| 顶部滑动导航 | 否    |                                                   |             |
+| swiper | 是    |                                                   | IndexSwiper |
+| 推荐商品   | 是    |                                                   | Recomand    |
+| 头图     | 需要   | 多处地方使用                                            | banner      |
+| 宫格     | 需要   | 多处地方使用                                            | icons       |
+| 卡片     | 需要   | 多处地方使用                                            | card        |
+| 品牌     | 需要   | 多处地方使用                                            | brand       |
+| 热销     | 需要   | 多处地方使用                                            | hot         |
+| 店铺     | 需要   |                                                   | Shop        |
+| 猜你喜欢   | 需要   | 循环调用公共的CommodityList组件(CommodityList要调用Commodity) |             |
+| 上拉加载   |      |                                                   |             |
 
 ### 2. 搜索 search
 
@@ -63,10 +65,11 @@ search页面里东西不多，可以不封装
 
 ### 9. 支付
 
-| 公用的组件     | 名称          |
-| -------------- | ------------- |
+| 公用的组件   | 名称            |
+|---------|---------------|
 | 单独的商品展示 | commodity     |
-| 商品展示列表   | commodityList |
+| 商品展示列表  | commodityList |
+| 卡片      | card          |
 
 
 | 功能    | 名称          |
@@ -80,17 +83,17 @@ demoo
 ├─ index.html
 ├─ main.js - vue初始化入口文件
 ├─ manifest.json - 配置文件：appID、logo
-├─ pages
+├─ pages 每个单独的页面
 │  ├─ index
 │  │  └─ index.vue
 │  └─ list
 │     └─ list.vue
-├─ components
-│  ├─ common
+├─ components 页面中的组件
+│  ├─ common --- 不同页面都会使用到的组件
 │  │  └─ commodity.vue
-│  └─ index
+│  └─ index --- 针对index，只对index有用的组件
 │     └─ Banner.vue
-├─ common - 公共文件：全局的css文件
+├─ common - 公共文件：全局的css文件 || 全局js文件
 ├─ pages.json - 配置文件：导航、tabbar、路由
 ├─ static - 静态资源： 图片，字体，图标（样式会单独新开一个文件夹）
 │  └─ logo.png
@@ -104,3 +107,9 @@ demoo
 放大镜，消息，垃圾桶，上箭头，下箭头，购物车
 引入iconfont.css iconfont.tts
 将其某些内容里的东西删除，后三行。
+
+小程序和app端的内容的展现，在同一套代码中，会是不一样效果。需要单独处理。navigationStyle ---> 处理小程序的navigationStyle
+
+750的设计图  28rpx = 14px rpx自适应了，建议用rpx
+
+swiper有自己的高度 height 150px , 会把图片多余的部分进行遮挡了.app中需要改变默认高度的大小。
