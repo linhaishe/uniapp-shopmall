@@ -21,6 +21,9 @@ export default {
             return rej();
           }
 
+          setTimeout(function () {
+            uni.hideLoading()
+          }, 2000)
           let data = res.data.data;
           res(data);
         },
